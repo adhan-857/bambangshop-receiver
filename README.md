@@ -66,7 +66,7 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Create Notification database and Notification repository struct skeleton.`
     -   [x] Commit: `Implement add function in Notification repository.`
     -   [x] Commit: `Implement list_all_as_string function in Notification repository.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
+    -   [x] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
     -   [ ] Commit: `Create Notification service struct skeleton.`
     -   [ ] Commit: `Implement subscribe function in Notification service.`
@@ -85,5 +85,9 @@ This is the place for you to write reflections:
 ### Mandatory (Subscriber) Reflections
 
 #### Reflection Subscriber-1
+1. Dalam tutorial ini, kita menggunakan `RwLock<>` untuk mensinkronisasi penggunaan `Vec` dari notifikasi karena `RwLock<>` memungkinkan banyak *thread* untuk membaca vektor notifikasi secara bersamaan. Sementara `Mutex<>` hanya mengizinkan satu *thread* pada satu waktu untuk mengakses data, yang tidak sesuai dengan kebutuhan kasus ini, di mana kita ingin memungkinkan banyak *subscriber* atau *thread* membaca notifikasi secara simultan. Karena itu, penggunaan `RwLock<>` lebih tepat dalam konteks ini untuk efisiensi dalam proses baca yang sering terjadi.
+<br>
+
+2. Penggunaan `lazy_static` *library* dalam tutorial ini membantu kita menginisialisasi variabel *static* dalam Rust, di mana variabel tersebut akan ada secara tunggal dalam program. Dalam Rust, variabel *static* dibuat sebagai *immutable* untuk menjamin keamanan, terutama dalam konteks *concurrent programming*. Rust mengharuskan kita untuk memikirkan mengenai masalah sinkronisasi dan cara mengatasinya, untuk mencegah masalah seperti *data races* dan isu konkurensi lainnya. Tentunya hal ini berbeda dibandingkan Java yang memperbolehkan mutasi isi dari variabel *static* melalui fungsi *static*. Rust mengambil pendekatan ini untuk memastikan keamanan dan *data integrity* dalam situasi *multi-threading*.
 
 #### Reflection Subscriber-2
