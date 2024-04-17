@@ -76,8 +76,8 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement receive_notification function in Notification service.`
     -   [x] Commit: `Implement receive function in Notification controller.`
     -   [x] Commit: `Implement list_messages function in Notification service.`
-    -   [ ] Commit: `Implement list function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
+    -   [x] Commit: `Implement list function in Notification controller.`
+    -   [x] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -88,6 +88,13 @@ This is the place for you to write reflections:
 1. Dalam tutorial ini, kita menggunakan `RwLock<>` untuk mensinkronisasi penggunaan `Vec` dari notifikasi karena `RwLock<>` memungkinkan banyak *thread* untuk membaca vektor notifikasi secara bersamaan. Sementara `Mutex<>` hanya mengizinkan satu *thread* pada satu waktu untuk mengakses data, yang tidak sesuai dengan kebutuhan kasus ini, di mana kita ingin memungkinkan banyak *subscriber* atau *thread* membaca notifikasi secara simultan. Karena itu, penggunaan `RwLock<>` lebih tepat dalam konteks ini untuk efisiensi dalam proses baca yang sering terjadi.
 <br>
 
-2. Penggunaan `lazy_static` *library* dalam tutorial ini membantu kita menginisialisasi variabel *static* dalam Rust, di mana variabel tersebut akan ada secara tunggal dalam program. Dalam Rust, variabel *static* dibuat sebagai *immutable* untuk menjamin keamanan, terutama dalam konteks *concurrent programming*. Rust mengharuskan kita untuk memikirkan mengenai masalah sinkronisasi dan cara mengatasinya, untuk mencegah masalah seperti *data races* dan isu konkurensi lainnya. Tentunya hal ini berbeda dibandingkan Java yang memperbolehkan mutasi isi dari variabel *static* melalui fungsi *static*. Rust mengambil pendekatan ini untuk memastikan keamanan dan *data integrity* dalam situasi *multi-threading*.
+2. Penggunaan `lazy_static` *library* dalam tutorial ini membantu kita menginisialisasi variabel *static* dalam Rust, di mana variabel tersebut akan ada secara tunggal dalam program. Dalam Rust, variabel *static* dibuat sebagai *immutable* untuk menjamin keamanan, terutama dalam konteks *concurrent programming*. Rust mengharuskan kita untuk memikirkan mengenai masalah sinkronisasi dan cara mengatasinya, untuk mencegah masalah seperti *data races* dan isu konkurensi lainnya. Tentunya hal ini berbeda dibandingkan Java yang memperbolehkan kita mengubah isi dari variabel *static* melalui fungsi *static*. Rust mengambil pendekatan ini untuk memastikan keamanan dan *data integrity* dalam situasi *multi-threading*.
 
 #### Reflection Subscriber-2
+1. Menurut saya, `lib.rs` berguna menyimpan informasi dan objek serta fungsi krusial dari *library* atau aplikasi yang kita kembangkan. Misalnya, `lib.rs` dapat digunakan untuk menyimpan konfigurasi aplikasi yang mencakup informasi seperti *root url*, nama *instance*, dan lain-lain. Selain itu, file ini juga bisa digunakan untuk menyimpan objek penting lainnya yang berkaitan dengan aplikasi, seperti *Error Response*. Adanya `lib.rs` juga memudahkan pengelolaan dan pemeliharaan kode yang merupakan inti dari aplikasi atau *library*.
+<br>
+
+2. *Observer pattern* memudahkan kita dalam menambahkan *subscriber* karena setiap *subscriber* hanya perlu mendaftarkan dirinya ke *publisher*. Dalam kasus ini, *publisher* tidak memerlukan informasi mendetail tentang *subscriber*, sehingga membantu dalam melakukan *decoupling* antara *publisher* dan *subscriber*. Hal ini memungkinkan penambahan *subscriber* baru tanpa perlu mengubah atau mempengaruhi *publisher*. Untuk penambahan lebih dari satu *instance* dari *Main App*, prosesnya juga tetap mudah karena setiap *subscriber* hanya perlu mendaftarkan dirinya ke setiap *instance* yang ada. Hal ini dapat mempertahankan fleksibilitas dan skalabilitas aplikasi tanpa komplikasi tambahan.
+<br>
+
+3. Menurut saya, *Postman collection* sangat membantu dalam memeriksa kebenaran program milik saya dengan mudah. *Postman collection* memudahkan saya dalam mendokumentasikan pengetesan API dan membuat pengetesan berjalan lebih sistematis. Tentunya hal ini memudahkan saya baik dalam mengerjakan tutorial maupun proyek kelompok. Penggunaan fitur ini memastikan bahwa setiap aspek dari API yang saya kembangkan bersama kelompok saya dapat diuji dan diverifikasi secara efektif, sehingga dapat meningkatkan efisiensi kerja dari kelompok saya.
